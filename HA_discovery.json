@@ -1,0 +1,43 @@
+{
+  "name": "H2O Status",
+  "stat_t": "tele/xr3_3D6C07/LWT",
+  "pl_on": "Online",
+  "pl_off": "Offline",
+  "dev_cla": "connectivity",
+  "uniq_id": "3D6C07_status",
+  "dev": {
+    "ids": [
+      "3D6C07"
+    ],
+    "name": "XR3 Feit H2O 3D6C07",
+    "mdl": "Feit Electric H2O/WIFI",
+    "sw": "Fav XR3",
+    "mf": "Fav"
+  }
+}
+
+{
+  "name": "H2O Moisture",
+  "stat_t": "stat/xr3_3D6C07/MOISTURE",
+  "dev_cla": "moisture",
+  "frc_upd": true,
+  "uniq_id": "3D6C07_moisture",
+  "dev": {
+    "ids": [
+      "3D6C07"
+    ]
+  }
+}
+
+{
+  "name": "H2O Battery",
+  "stat_t": "stat/xr3_3D6C07/BATTERY",
+  "dev_cla": "battery",
+  "unit_of_meas": "%",
+  "uniq_id": "3D6C07_battery",
+  "dev": {
+    "ids": [
+      "3D6C07"
+    ]
+  }
+}

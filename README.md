@@ -1,4 +1,4 @@
-# XR809-Feit-H2O-WIFI / XR3/XR809 MQTT + Tuya MCU Serial Communication
+# XR3/XR809 MQTT + Tuya MCU Serial Communication Demo
 
 Custom firmware for Feit Electric Smart Wi-Fi Water Sensor with MQTT and Tuya MCU Serial Communication. This device has the Tuya XR3 WIFI Module and a Tuya MCU.
 
@@ -62,8 +62,6 @@ To use, you need to make a secrets.h file in /project/at_demo/ folder with conte
 #define my_mqtt_user "yourmqttuser"
 #define my_mqtt_pass "yourmqttpass"
 ```
-
-You may also have to put one in /src/atcmd/. (I think, there's something in the AT related includes that is causing the OS_Sleep commands to function properly. Without them, I get no time delay. So, those includes are staying for now.)
 
 ## Module Timeout / Connection Procedure
 

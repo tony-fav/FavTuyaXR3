@@ -31,7 +31,6 @@
 #include "at_private.h"
 #include "at_debug.h"
 #include "net/wlan/wlan.h"
-#include "secrets.h"
 #include "kernel/os/os.h"
 #include "driver/chip/hal_gpio.h"
 
@@ -198,7 +197,6 @@ static AT_ERROR_CODE reassociate_handler(at_para_t *at_para);
 //static AT_ERROR_CODE gpiow_handler(at_para_t *at_para);
 //static AT_ERROR_CODE upgrade_handler(at_para_t *at_para);
 static AT_ERROR_CODE scan_handler(at_para_t *at_para);
-static AT_ERROR_CODE my_wifi_connect(at_para_t *at_para);
 static AT_ERROR_CODE my_gpio_read(at_para_t *at_para);
 
 at_callback_t at_callback;
@@ -242,7 +240,6 @@ static const at_command_handler_t at_command_table[] = {
 	//{"AT+S.HTTPDFSERASE",	NULL,				" -- Erase the external httpd filesystem"},
 	//{"AT+S.HTTPD",			NULL,				" =<0|1> -- Disable/Enable web server"},
 	{"AT+S.SCAN",			scan_handler,		" -- Perform a scan"},
-	{"AT+S.WIFI_C",			my_wifi_connect,	" -- Connect to my wifi"},
 	{"AT+S.GPIOD", 			my_gpio_read, 		" -- dump GPIOs"}
 };
 
@@ -1277,33 +1274,6 @@ static AT_ERROR_CODE scan_handler(at_para_t *at_para)
 
 		return at_scan(cmd_para.mode, cmd_para.repeat);
 	}
-}
-
-int httpd_start();
-static AT_ERROR_CODE my_wifi_connect(at_para_t *at_para)
-{
-
-	const char *ssid = my_wifi_ssid;    /* set your AP's ssid */
-	const char *psk = my_wifi_pass; /* set your AP's password */
-
-	/* set ssid and password to wlan */
-	wlan_sta_set((uint8_t *)ssid, strlen(ssid), (uint8_t *)psk);
-
-	/* start scan and connect to ap automatically */
-	wlan_sta_enable();
-
-	OS_Sleep(10); // Wait and try immediate reconnect
-
-	/* set ssid and password to wlan */
-	wlan_sta_set((uint8_t *)ssid, strlen(ssid), (uint8_t *)psk);
-
-	/* start scan and connect to ap automatically */
-	wlan_sta_enable();
-	
-	/* start web server */
-	httpd_start();
-
-	return AEC_OK;
 }
 
 static AT_ERROR_CODE my_gpio_read(at_para_t *at_para)
